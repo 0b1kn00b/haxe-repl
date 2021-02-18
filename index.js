@@ -158,7 +158,7 @@ function haxeRepl(extraArgs) {
             const js = output.split('"<LINE>";\n');
             let result = null;
             const src = js[0] + js.pop() + 'undefined;\n' + (lastOp == 2 ? js.pop() : '');
-            console.log(process.env);
+            //console.log(process.env);
             // evaluate
             try {
                 const vm = new NodeVM({
@@ -172,7 +172,7 @@ function haxeRepl(extraArgs) {
                     mock : {
                         events : require("events")
                     },
-                    env : process.env
+                    env : { PRJ_DIR : process.env.PRJ_DIR }
                   }
                 });
                 const result = vm.run(src,pwd);
