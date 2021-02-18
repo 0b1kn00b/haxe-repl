@@ -159,16 +159,16 @@ function haxeRepl(extraArgs) {
 
             // evaluate
             try {
-                const script = new NodeVm(
+                const vm = new NodeVm({
                   require : {
                     external : true,
                     builtin : "[*]",
-                    resolve : (request,options)=> {
+                    require : (request,options) => {
                       return require.resolve(request, { paths : [pwd,options]});
                     }
                   }
-                );new vm.Script(src);
-                const result = script.runInContext(context);
+                });
+                const result = vm.run(src,pwd);
                 callback(null, result);
                 if (autoPop) {
                     buffer.pop();
