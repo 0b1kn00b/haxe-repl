@@ -10,7 +10,7 @@ const fs = require('fs');
 const { NodeVM } = require('vm2');
 const tmp = require('tmp');
 const exec = require('child_process').exec;
-
+const vm    = require('vm');
 const reErr = /\/Repl.hx:([0-9]+): (.*)/;
 const reImport = /^(import|using)\s/;
 const reIdent = /^[a-z0-9_]+$/;
@@ -161,21 +161,22 @@ function haxeRepl(extraArgs) {
             //console.log(process.env);
             // evaluate
             try {
-                const vm = new NodeVM({
-                  require : {
-                    external : true,
-                    builtin : ["*"],
-                    resolve : (request,options) => {
-                      console.log(options);
-                      return require.resolve(request, { paths : [pwd,options]});
-                    },
-                    mock : {
-                        events : require("events")
-                    },
-                    env : { PRJ_DIR : process.env.PRJ_DIR }
-                  }
-                });
-                const result = vm.run(src,pwd);
+                // const vm = new NodeVM({
+                //   require : {
+                //     external : true,
+                //     builtin : ["*"],
+                //     resolve : (request,options) => {
+                //       console.log(options);
+                //       return require.resolve(request, { paths : [pwd,options]});
+                //     },
+                //     mock : {
+                //         events : require("events")
+                //     },
+                //     env : { PRJ_DIR : process.env.PRJ_DIR }
+                //   }
+                // });
+                const script = new vm.Script(src);
+                const result = script.runInContext(context);
                 callback(null, result);
                 if (autoPop) {
                     buffer.pop();
