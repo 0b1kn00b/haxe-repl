@@ -130,9 +130,10 @@ function haxeRepl(extraArgs) {
             );
         fs.writeFileSync(tmpClass, src);
 
+        var pwd = process.cwd();
         if(program.opts().pwd){
-          console.log(program.opts().pwd);
-          process.chdir(program.opts().pwd); 
+          //console.log(program.opts().pwd);
+          pwd = program.opts().pwd; 
         }
         // compile entire code
         exec(`haxe ${args}`, (err, stdout, stderr) => {
@@ -159,7 +160,7 @@ function haxeRepl(extraArgs) {
 
             // evaluate
             try {
-                const vm = new NodeVm({
+                const vm = new NodeVM({
                   require : {
                     external : true,
                     builtin : "[*]",
