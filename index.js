@@ -164,7 +164,7 @@ function haxeRepl(extraArgs) {
                 const vm = new NodeVM({
                   require : {
                     external : true,
-                    builtin : "[*]",
+                    builtin : ["*"],
                     resolve : (request,options) => {
                       console.log(options);
                       return require.resolve(request, { paths : [pwd,options]});
