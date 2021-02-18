@@ -171,7 +171,8 @@ function haxeRepl(extraArgs) {
                     },
                     mock : {
                         events : require("events")
-                    }
+                    },
+                    env : process.env
                   }
                 });
                 const result = vm.run(src,pwd);
