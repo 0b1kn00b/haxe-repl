@@ -158,7 +158,7 @@ function haxeRepl(extraArgs) {
             const js = output.split('"<LINE>";\n');
             let result = null;
             const src = js[0] + js.pop() + 'undefined;\n' + (lastOp == 2 ? js.pop() : '');
-
+            console.log(process.env.PRJ_DIR);
             // evaluate
             try {
                 const vm = new NodeVM({
