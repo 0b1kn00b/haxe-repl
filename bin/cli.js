@@ -19,4 +19,4 @@ exec(`haxe -version`, (err, stdout, stderr) => {
         eval: compile,
         ignoreUndefined: true
     });
-});
+})

@@ -10,6 +10,7 @@
   "author": "Philippe Elsass",
   "license": "ISC",
   "dependencies": {
-    "tmp": "0.0.33"
+    "tmp": "0.0.33",
+    "vm2": "^3.9.2"
   }
 }
