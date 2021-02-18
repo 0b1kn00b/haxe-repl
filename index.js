@@ -165,9 +165,12 @@ function haxeRepl(extraArgs) {
                   require : {
                     external : true,
                     builtin : "[*]",
-                    require : (request,options) => {
+                    resolve : (request,options) => {
                       console.log(options);
                       return require.resolve(request, { paths : [pwd,options]});
+                    },
+                    mock : {
+                        events : require("events")
                     }
                   }
                 });
