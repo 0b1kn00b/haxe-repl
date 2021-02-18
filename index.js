@@ -133,7 +133,8 @@ function haxeRepl(extraArgs) {
         var pwd = process.cwd();
         if(program.opts().pwd){
           //console.log(program.opts().pwd);
-          pwd = program.opts().pwd; 
+          pwd = program.opts().pwd;
+          console.log(pwd); 
         }
         // compile entire code
         exec(`haxe ${args}`, (err, stdout, stderr) => {
@@ -165,6 +166,7 @@ function haxeRepl(extraArgs) {
                     external : true,
                     builtin : "[*]",
                     require : (request,options) => {
+                      console.log(options);
                       return require.resolve(request, { paths : [pwd,options]});
                     }
                   }
