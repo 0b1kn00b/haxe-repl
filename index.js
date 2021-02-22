@@ -37,10 +37,11 @@ function printCompilerError(stderr) {
         const m = reErr.exec(line);
         if (m) {
             const desc = m[2];
-            if (desc.indexOf(WARNING) >= 0 && program.opts().warnings) {
-              console.log('Repl:', desc.split(WARNING)[1], program.opts().warnings);;
-            }
-            else {
+            if (desc.indexOf(WARNING) >= 0) {
+                if(program.opts().warnings){
+                    console.log('Repl:', desc.split(WARNING)[1] );;
+                }
+            }else {
               console.log('Repl:', desc);
             }
         }
